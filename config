@@ -1028,6 +1028,8 @@ focus_follows_mouse no
 bindsym $mod+Shift+v exec --no-startup-id rb.sh;workspace 5;focus
 bindsym $mod+Shift+t exec --no-startup-id thunderbird;workspace 2;focus
 bindsym $mod+Shift+i exec --no-startup-id idea.sh;workspace 1;focus
-
+bindsym $mod+Shift+Mod1+r exec --no-startup-id ~/.screenlayout/default.sh
+bindsym $mod+Shift+Mod1+d exec --no-startup-id ~/.screenlayout/doma.sh
+bindsym $mod+Shift+Mod1+n exec --no-startup-id ~/.screenlayout/nb.sh
 
 
