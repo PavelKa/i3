@@ -27,13 +27,13 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id dmenu_run
 
 # launch categorized menu
 #bindsym $mod+y exec --no-startup-id morc_menu
@@ -43,10 +43,10 @@ bindsym $mod+d exec --no-startup-id dmenu_recency
 ################################################################################################
 
 exec --no-startup-id volumeicon
-bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
-#bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
@@ -64,9 +64,23 @@ bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
+bindsym Print exec --no-startup-id flameshot gui
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+
+##  Screenshots in files
+#bindsym Print exec --no-startup-id maim --format=png "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-all.png"
+#bindsym $mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-current.png"
+#bindsym Shift+Print exec --no-startup-id maim --format=png --select "/home/$USER/Pictures/screenshot-$(date -u +'%Y%m%d-%H%M%SZ')-selected.png"
+
+## Screenshots in clipboards
+#bindsym Ctrl+Print exec --no-startup-id maim --format=png | xclip -selection clipboard -t image/png
+#bindsym Ctrl+$mod+Print exec --no-startup-id maim --format=png --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+#bindsym Ctrl+Shift+Print exec --no-startup-id maim --format=png --select | xclip -selection clipboard -t image/png
+
+
+
+
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
@@ -321,8 +335,11 @@ set_from_resource $term_color15    color15
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
 	i3bar_command i3bar
-	status_command i3status
+   status_command i3status
 	position bottom
+ # status_command SCRIPT_DIR=~/.config/i3blocks i3blocks
+#  status_command  SCRIPT_DIR=~/.config/i3blocks i3blocks -c ~/.i3/i3blocks.config
+
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
@@ -418,7 +435,7 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 bindsym $mod+Shift+t exec --no-startup-id thunderbird;workspace 2;focus
-bindsym $mod+i exec --no-startup-id /opt/idea/idea-IU-221.5080.210/bin/idea.sh;workspace 2;focus
+bindsym $mod+i exec --no-startup-id idea;workspace 2;focus
 bindsym $mod+w exec --no-startup-id chromium;workspace 2;focus
 bindsym $mod+Shift+Return exec --no-startup-id pcmanfm;workspace 1;focus
 bindsym $mod+Ctrl+s exec --no-startup-id spotify;workspace 10;focus
@@ -426,7 +443,7 @@ bindsym $mod+Shift+i exec --no-startup-id pamac-manager;;focus
 bindsym $mod+Shift+v exec --no-startup-id /opt/vscode/visual-studio-code-bin/visual-studio-code-bin.sh;;focus
 exec --no-startup-id redshift-gtk
 exec --no-startup-id setxkbmap -layout cz
-exec --no-startup-id ~/.screenlayout/jenHDMI.sh
+exec --no-startup-id ~/.screenlayout/usbc.sh
 exec --no-startup-id chromium
 exec --no-startup-id thunderbird
 focus_follows_mouse no
@@ -434,3 +451,4 @@ for_window [class="Wfica"] move to workspace 5
 for_window [class="Pavucontrol"] floating disable
 bindsym $mod+Alt+m exec --no-startup-id mousepad;;focus
 bindsym $mod+Shift+x exec xset dpms force off;;
+
